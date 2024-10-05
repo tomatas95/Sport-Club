@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Sport Clubs</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/">Aisa Sport Club</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/clubs">Users List</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{clubs/new}">Become a Member!</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<body>
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div th:if="${message}">
+            <div class="alert alert-success" role="alert">
+                <p th:text="${message}"></p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                <h1 class="text-white font-weight-bold">Welcome to Aisa Sport Club!</h1>
+                <hr class="divider"/>
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <div class="container">
+                    <div class="row club-list">
+                        <div th:each="club : ${clubs}" class="col-md-4">
+                            <div class="club-card">
+                                <h5 th:text="${club.name}" class="club-name"></h5>
+                                <h5 th:text="${club.surname}" class="club-details"></h5>
+                                <p th:text="${club.email}" class="club-details"></p>
+                                <p th:text="${club.phone}" class="club-details"></p>
+                                <a th:href="@{/clubs/{clubId}(clubId=${club.id})}" class="btn btn-secondary">View</a>
+                                <a th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}" class="btn btn-primary">Edit</a>
+                                <a th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<footer class="bg-light py-5">
+    <div class="container px-4 px-lg-5">
+        <div class="small text-center text-muted">Copyright &copy; 2023 - Aisa Sport Club</div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<script th:src="@{js/scripts.js}"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let successMessage = document.querySelector(".alert-success");
+        if (successMessage) {
+            setTimeout(function () {
+                successMessage.remove();
+            }, 3000);
+        }
+    });
+</script>
